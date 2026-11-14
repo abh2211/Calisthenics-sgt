@@ -1,0 +1,5 @@
+.DS_Store
+*.before*.html
+*.zip
+shots/
+__pycache__/
