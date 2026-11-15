@@ -600,9 +600,9 @@
             </div>
 
             <div class="field">
-              <label for="phone">Phone number <span class="opt">(optional)</span></label>
-              <span class="hint" id="phone-hint">Only used to arrange the follow-up call, if you’d prefer a phone call.</span>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" aria-describedby="phone-hint phone-error">
+              <label for="phone">Phone number <span class="req">(required)</span></label>
+              <span class="hint" id="phone-hint">Used to arrange your follow-up call.</span>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30" aria-describedby="phone-hint phone-error">
               <p class="field-error" id="phone-error" hidden></p>
             </div>
 
@@ -872,9 +872,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!v) return "Please enter your email address.";
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return "Please enter a valid email address, like name@example.com.";
     }
-    if (name === "phone" && v) {
+    if (name === "phone") {
+      if (!v) return "Please enter your phone number.";
       var digits = v.replace(/\D/g, "");
-      if (!/^[\d\s()+\-.]+$/.test(v) || digits.length < 7 || digits.length > 15) return "Please check your phone number, or leave it blank.";
+      if (!/^[\d\s()+\-.]+$/.test(v) || digits.length < 7 || digits.length > 15) return "Please check your phone number.";
     }
     return "";
   }
@@ -937,7 +938,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var data = {
       first_name: fields.first_name.value.trim(),
       email: fields.email.value.trim(),
-      phone: fields.phone.value.trim() || "Not provided",
+      phone: fields.phone.value.trim(),
       _subject: form.querySelector('[name="_subject"]').value,
       _template: "table",
       _honey: form.querySelector('[name="_honey"]').value
